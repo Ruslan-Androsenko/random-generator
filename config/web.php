@@ -11,6 +11,11 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'api' => [
+            'class' => 'app\modules\api\ApiModule',
+        ]
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -45,8 +50,28 @@ $config = [
         'db' => $db,
         'urlManager' => [
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
+            'suffix' => '/',
+            'normalizer' => [
+                'class' => 'yii\web\UrlNormalizer',
+                'normalizeTrailingSlash' => true,
+                'collapseSlashes' => true,
+            ],
             'rules' => [
+                '<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
+                '<module:\w+><controller:\w+>/<action:update|delete>/<id:\d+>' => '<module>/<controller>/<action>',
+
+                'POST <module:api>/<controller:mac>/<action:generate>/<ip:>' => '<module>/<controller>/<action>',
+                'GET <module:api>/<controller:mac>/<action:getById>/<id:\d+>' => '<module>/<controller>/get-by-id',
+                'GET <module:api>/<controller:mac>/<action:getByIp>/<ip:>' => '<module>/<controller>/get-by-ip',
+                'GET <module:api>/<controller:mac>/<action:list>' => '<module>/<controller>/<action>',
+                'POST <module:api>/<controller:mac>/<action:changeStatus>/<id:\d+>' => '<module>/<controller>/change-status',
+
+                '/' => 'site/index',
+                'about' => 'site/about',
+                'contact' => 'site/contact',
+                'login' => 'site/login',
             ],
         ],
     ],
