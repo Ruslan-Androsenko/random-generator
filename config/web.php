@@ -10,6 +10,7 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@docs'  => '@app/web/docs',
     ],
     'modules' => [
         'api' => [
@@ -60,6 +61,8 @@ $config = [
             ],
             'rules' => [
                 '/' => 'site/index',
+                '<controller:\w+>/<action:exportAll>' => '<controller>/export-all',
+                '<controller:\w+>/<action:exportSubnet>' => '<controller>/export-subnet',
                 '<controller:\w+>/<action:(\w+)>' => '<controller>/<action>',
                 '<controller:\w+>/<action:(\w+)><ip:>' => '<controller>/<action>',
                 'POST <controller:mac>/<action:switch>' => '<controller>/<action>',
@@ -69,6 +72,7 @@ $config = [
                 'GET <module:api>/<controller:mac>/<action:getByIp>/<ip:>' => '<module>/<controller>/get-by-ip',
                 'GET <module:api>/<controller:mac|ip>/<action:list>' => '<module>/<controller>/<action>',
                 'POST <module:api>/<controller:mac>/<action:changeStatus>' => '<module>/<controller>/change-status',
+                'GET <module:api>/<controller:ip>/<action:getBySubnet>' => '<module>/<controller>/get-by-subnet',
 
                 '<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
                 '<module:\w+><controller:\w+>/<action:update|delete>/<id:\d+>' => '<module>/<controller>/<action>',
