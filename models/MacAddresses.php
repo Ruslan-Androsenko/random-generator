@@ -11,6 +11,7 @@ use Yii;
  * @property int $ip_address_id
  * @property int $status
  * @property int $attempts
+ * @property string $ip
  *
  */
 class MacAddresses extends \yii\base\Model
@@ -20,6 +21,7 @@ class MacAddresses extends \yii\base\Model
     public $ip_address_id;
     public $status;
     public $attempts;
+    public $ip;
 
     /**
      * {@inheritdoc}
@@ -29,8 +31,7 @@ class MacAddresses extends \yii\base\Model
         return [
             [['name', 'ip_address_id'], 'required'],
             [['id', 'ip_address_id', 'status', 'attempts'], 'integer'],
-            [['name'], 'string', 'max' => 255],
-            [['ip_address_id'], 'exist', 'skipOnError' => true, 'targetClass' => IpAddresses::className(), 'targetAttribute' => ['ip_address_id' => 'id']],
+            [['name', 'ip'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,8 +44,9 @@ class MacAddresses extends \yii\base\Model
             'id' => 'ID',
             'name' => 'MAC-адрес',
             'ip_address_id' => 'Ip Address ID',
-            'status' => 'Статус активности Mac-адреса',
+            'status' => 'Статус',
             'attempts' => 'С какой попытки был создан уникальный Mac-адрес',
+            'ip' => 'IP-адрес',
         ];
     }
 }
