@@ -62,16 +62,16 @@ $config = [
                 '<module:\w+>/<controller:\w+>/<action:\w+>'=>'<module>/<controller>/<action>',
                 '<module:\w+><controller:\w+>/<action:update|delete>/<id:\d+>' => '<module>/<controller>/<action>',
 
-                'POST <module:api>/<controller:mac>/<action:generate>/<ip:>' => '<module>/<controller>/<action>',
+                'POST <module:api>/<controller:mac>/<action:generate>' => '<module>/<controller>/<action>',
                 'GET <module:api>/<controller:mac>/<action:getById>/<id:\d+>' => '<module>/<controller>/get-by-id',
                 'GET <module:api>/<controller:mac>/<action:getByIp>/<ip:>' => '<module>/<controller>/get-by-ip',
                 'GET <module:api>/<controller:mac>/<action:list>' => '<module>/<controller>/<action>',
                 'POST <module:api>/<controller:mac>/<action:changeStatus>/<id:\d+>' => '<module>/<controller>/change-status',
 
+                '<controller:\w+>/<action:(\w+)>' => '<controller>/<action>',
+                '<controller:\w+>/<action:(\w+)><ip:>' => '<controller>/<action>',
+
                 '/' => 'site/index',
-                'about' => 'site/about',
-                'contact' => 'site/contact',
-                'login' => 'site/login',
             ],
         ],
     ],
@@ -85,6 +85,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
@@ -92,6 +93,7 @@ if (YII_ENV_DEV) {
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 }
 

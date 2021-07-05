@@ -12,7 +12,7 @@ class MacController extends ActiveController
 {
     public $modelClass = 'app\modules\api\models\MacAddresses';
 
-    public function actionGenerate($ip)
+    public function actionGenerate()
     {
         $response = [
             "message" => "Получаем существующую запись",
@@ -20,6 +20,7 @@ class MacController extends ActiveController
         ];
 
         // Получаем IP-адрес
+        $ip = Yii::$app->request->post('ip') ?? '';
         $ipAddress = IpAddresses::findOne(['name' => $ip]);
 
         if (!$ipAddress) {
