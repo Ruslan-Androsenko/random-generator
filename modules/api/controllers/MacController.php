@@ -116,13 +116,14 @@ class MacController extends ActiveController
         return $response;
     }
 
-    public function actionChangeStatus($id)
+    public function actionChangeStatus()
     {
         $response = [
             "message" => "Статус Mac-адреса изменен",
             "success" => true,
         ];
 
+        $id = Yii::$app->request->post('id') ?? 0;
         $macAddress = MacAddresses::findOne(["id" => $id]);
 
         if (empty($macAddress)) {
